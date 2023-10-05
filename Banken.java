@@ -45,24 +45,35 @@ public class Banken {
 
     public static void deposit() {
         System.out.println("How much do you want to deposit?(sek)");
-        int deposit = input.nextInt();
-        if (deposit > 0)
-            balance += deposit;
-        else
-            System.out.println("Enter a positive number larger than 0 please.");
+        if (input.hasNextInt()) {
+            int deposit = input.nextInt();
+                if (deposit > 0) {
+                    balance += deposit;   
+                } else {
+                    System.out.println("Enter a positive number larger than 0 please.");
+                } 
+        } else {
+            System.out.println("Invalid input. Please select a valid option.");
+            input.next();
+        }
     }
 
     public static void withdraw() {
         System.out.println("How much do you want to withdraw?(sek)");
-        int withdraw = input.nextInt();
-        if (withdraw > 0) {
-            if (withdraw <= balance) {
-                balance -= withdraw;
+        if (input.hasNextInt()) {
+            int withdraw = input.nextInt();
+            if (withdraw > 0) {
+                if (withdraw <= balance) {
+                    balance -= withdraw;
+                } else {
+                    System.out.println("You can't withdraw that much!\nMax withdrawal: " + balance + " sek");
+                }
             } else {
-                System.out.println("You can't withdraw that much!\nMax withdrawal: " + balance + " sek");
+                System.out.println("Enter a positive number larger than 0 please.");
             }
         } else {
-            System.out.println("Enter a positive number larger than 0 please.");
+            System.out.println("Invalid input. Please select a valid option.");
+            input.next();
         }
     }
 
